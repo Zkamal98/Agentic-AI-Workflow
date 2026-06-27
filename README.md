@@ -137,6 +137,7 @@ The shift from prompt-based AI to **Agentic AI** is the biggest leap in tech rig
 > *Screen recording of the live workflow running autonomously — from web scan to LinkedIn post.*
 
 *(See screen recording in project assets)*
+https://www.linkedin.com/posts/ugcPost-7476193604500234240--ldz/?utm_source=share&utm_medium=member_desktop&rcm=ACoAADTjCNYBIaMeGZerdKeOvG9a-zQDRhHgsiU
 
 ---
 
