@@ -159,7 +159,7 @@ This project is licensed under the **MIT License** — see [LICENSE](LICENSE) fo
 ## 👩‍💻 Author
 
 **Syeda Zainab Kamal**
-- 🔗 [LinkedIn](https://linkedin.com/in/your-profile)
+- 🔗 [LinkedIn](https://www.linkedin.com/in/syeda-zainab-kamal-5061a0209/)
 - 🐙 [GitHub](https://github.com/Zkamal98)
 
 ---
