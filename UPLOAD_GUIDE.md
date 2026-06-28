@@ -1,4 +1,4 @@
-# 🗺️ GitHub Upload — Complete Guide for Zainab
+# 🗺️ GitHub Upload — Complete Guide
 
 ## What's included in your repo package
 
