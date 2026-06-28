@@ -1,0 +1,485 @@
+{
+    "name": "Agentic-AI-Workflow",
+    "flow": [
+        {
+            "id": 1,
+            "module": "util:BasicTrigger",
+            "version": 1,
+            "parameters": {
+                "values": [
+                    {
+                        "spec": [
+                            {
+                                "name": "topic",
+                                "value": "Latest trends in Agentic AI and Automation"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "values": {
+                            "items": [
+                                {
+                                    "spec": {
+                                        "mode": "chose",
+                                        "items": [
+                                            null
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "values",
+                        "spec": [
+                            {
+                                "name": "spec",
+                                "spec": [
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "value",
+                                        "type": "text",
+                                        "label": "Value",
+                                        "required": true
+                                    }
+                                ],
+                                "type": "array",
+                                "label": "Items",
+                                "required": true
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Bundles",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "topic",
+                        "type": "text",
+                        "label": "topic"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "module": "make-ai-web-search:generateAResponse",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "input": "Find the 3 latest news stories about \"Agentic AI\" and summarize them.",
+                "parseJson": false,
+                "user_location": {
+                    "type": "approximate"
+                }
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "parseJson": {
+                            "mode": "chose"
+                        },
+                        "user_location": {
+                            "nested": {
+                                "country": {
+                                    "mode": "chose",
+                                    "label": "Empty"
+                                },
+                                "timezone": {
+                                    "mode": "chose",
+                                    "label": "Empty"
+                                }
+                            }
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "input",
+                        "type": "text",
+                        "label": "Text",
+                        "required": true
+                    },
+                    {
+                        "name": "parseJson",
+                        "type": "boolean",
+                        "label": "Parse JSON in response",
+                        "required": true
+                    },
+                    {
+                        "name": "user_location",
+                        "spec": [
+                            {
+                                "name": "type",
+                                "type": "hidden"
+                            },
+                            {
+                                "name": "city",
+                                "type": "text",
+                                "label": "City"
+                            },
+                            {
+                                "name": "country",
+                                "type": "select",
+                                "label": "Country"
+                            },
+                            {
+                                "name": "region",
+                                "type": "text",
+                                "label": "Region"
+                            },
+                            {
+                                "name": "timezone",
+                                "type": "select",
+                                "label": "Timezone"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "User Location"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 18,
+            "module": "gemini-ai:simpleTextPrompt",
+            "version": 1,
+            "parameters": {},
+            "filter": null,
+            "mapper": {
+                "model": "gemini-3.5-flash",
+                "textPrompt": "You are a thought leader on LinkedIn posting about enterprise technology. Write an engaging, natural, high-performing text post about the following trends. \r\n\r\nStrict formatting and tone rules:\r\n1. NEVER use asterisks (**) or any markdown styling for bolding or emphasis. Write entirely in plain text.\r\n2. Avoid typical AI transition phrases (like \"The bottom line:\", \"At a crossroads\", or \"Crucial crossroads\", Let's discuss in the Comment!\"). \r\n3. Keep the paragraphs short, punchy, and conversational—write like a human executive sharing a real insight, not an essay.\r\n4. Include brief vertical spacing between ideas and end with 3-5 relevant hashtags.\r\n\r\nTrends data: {{4.result}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "model": {
+                            "label": "Gemini 3.5 FlashNext-generation speed and efficiency, optimized for high-volume reasoning and low-latency intelligence"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "gemini-3.5-flash",
+                                "gemini-3.1-pro-preview",
+                                "gemini-3-flash-preview",
+                                "gemini-2.5-pro",
+                                "gemini-2.5-flash"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "textPrompt",
+                        "type": "text",
+                        "label": "Text prompt",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 9,
+            "module": "picsart:text2image",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 8174765
+            },
+            "mapper": {
+                "count": "1",
+                "width": "1024",
+                "height": "1024",
+                "prompt": "A futuristic digital illustration showing: , bright colors, high-tech style, detailed digital art, no text inside the picture."
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1327,
+                    "y": -26
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "picsart2"
+                            },
+                            "label": "My Picsart GenAI connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:picsart2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "prompt",
+                        "type": "text",
+                        "label": "Prompt",
+                        "required": true
+                    },
+                    {
+                        "name": "width",
+                        "type": "uinteger",
+                        "label": "Width"
+                    },
+                    {
+                        "name": "height",
+                        "type": "uinteger",
+                        "label": "Height"
+                    },
+                    {
+                        "name": "count",
+                        "type": "uinteger",
+                        "label": "Count",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 22,
+            "module": "linkedin:ShareImage",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 8552400
+            },
+            "mapper": {
+                "url": "{{9.imageURL}}",
+                "method": "link",
+                "content": "{{18.result}}",
+                "visibility": "PUBLIC",
+                "feedDistribution": "MAIN_FEED",
+                "isReshareDisabledByAuthor": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1728,
+                    "y": -22
+                },
+                "restore": {
+                    "expect": {
+                        "method": {
+                            "label": "Upload by link"
+                        },
+                        "visibility": {
+                            "mode": "chose",
+                            "label": "Anyone"
+                        },
+                        "feedDistribution": {
+                            "mode": "chose",
+                            "label": "Main feed"
+                        },
+                        "isReshareDisabledByAuthor": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "linkedin2"
+                            },
+                            "label": "My LinkedIn connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:linkedin2,linkedin-openid",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "method",
+                        "type": "select",
+                        "label": "Choose Upload Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "upload",
+                                "link"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "type": "text",
+                        "label": "Title"
+                    },
+                    {
+                        "name": "altText",
+                        "type": "text",
+                        "label": "Alt Text"
+                    },
+                    {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content",
+                        "required": true
+                    },
+                    {
+                        "name": "visibility",
+                        "type": "select",
+                        "label": "Visibility",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "PUBLIC",
+                                "CONNECTIONS",
+                                "LOGGED_IN"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "feedDistribution",
+                        "type": "select",
+                        "label": "Feed Distribution",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "MAIN_FEED",
+                                "NONE"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "isReshareDisabledByAuthor",
+                        "type": "boolean",
+                        "label": "Is Reshare Disabled",
+                        "required": true
+                    },
+                    {
+                        "name": "url",
+                        "type": "text",
+                        "label": "Image URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "select",
+                        "label": "Choose Upload Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "upload",
+                                "link"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "type": "text",
+                        "label": "Title"
+                    },
+                    {
+                        "name": "altText",
+                        "type": "text",
+                        "label": "Alt Text"
+                    },
+                    {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content",
+                        "required": true
+                    },
+                    {
+                        "name": "visibility",
+                        "type": "select",
+                        "label": "Visibility",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "PUBLIC",
+                                "CONNECTIONS",
+                                "LOGGED_IN"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "feedDistribution",
+                        "type": "select",
+                        "label": "Feed Distribution",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "MAIN_FEED",
+                                "NONE"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "isReshareDisabledByAuthor",
+                        "type": "boolean",
+                        "label": "Is Reshare Disabled",
+                        "required": true
+                    },
+                    {
+                        "name": "url",
+                        "type": "text",
+                        "label": "Image URL",
+                        "required": true
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.make.com",
+        "notes": []
+    }
+}
